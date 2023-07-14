@@ -255,7 +255,6 @@ module.exports = function(router) {
 
       debug.loadSubmission(`Searching for form: ${formId}, and submission: ${subId}`);
       const query = {_id: subId, form: formId, deleted: {$eq: null}};
-      debug.loadSubmission(query);
       const submissionModel = req.submissionModel || router.formio.resources.submission.model;
       submissionModel.findOne(hook.alter('submissionQuery', query, req)).lean().exec((err, submission) => {
         if (err) {
@@ -306,7 +305,6 @@ module.exports = function(router) {
       debug.loadSubmissionRevision(`Searching for form: ${req.params.formId}, and submission: ${submissionRevisionId}`);
 
       const query = {_id: submissionRevisionId, form: req.params.formId, deleted: {$eq: null}};
-      debug.loadSubmissionRevision(query);
 
       const submissionRevisionModel = req.submissionRevisionModel || router.formio.resources.submissionrevision.model;
 
@@ -341,7 +339,6 @@ module.exports = function(router) {
         _id: {$in: subs.map((subId) => util.idToBson(subId))},
         deleted: {$eq: null}
       };
-      debug.loadSubmissions(query);
       const submissionModel = req.submissionModel || router.formio.resources.submission.model;
       submissionModel.find(hook.alter('submissionQuery', query, req)).lean().exec((err, submissions) => {
         if (err) {
@@ -567,14 +564,20 @@ module.exports = function(router) {
 
       // Get all the subform data.
       const subs = {};
-      util.eachComponent(form.components, function(component, path) {
-        if (component.type === 'form') {
+      const getSubs = (components, outerPath) => util.eachComponent(components, function(component, path) {
+        const subData = _.get(submission.data, path);
+        if (Array.isArray(subData)) {
+          return subData.forEach((_, idx) => getSubs(component.components, `${path}[${idx}]`));
+        }
+        if (component.type === 'form' || component.reference) {
           const subData = _.get(submission.data, path);
           if (subData && subData._id) {
             subs[subData._id.toString()] = {component, path, data: subData.data};
           }
         }
-      }, true);
+      }, true, outerPath);
+
+      getSubs(form.components);
 
       // Load all the submissions within this submission.
       this.loadSubmissions(req, Object.keys(subs), (err, submissions) => {
