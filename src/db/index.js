@@ -3,7 +3,6 @@
 const async = require('async');
 const MongoClient = require('mongodb').MongoClient;
 const semver = require('semver');
-const fetch = require('@formio/node-fetch-http-proxy');
 const _ = require('lodash');
 const fs = require('fs');
 const debug = {
@@ -37,6 +36,20 @@ module.exports = function(formio) {
 
   // Allow anyone to hook the current config.
   config = formio.hook.alter('updateConfig', config);
+
+  // Tyler Agency Intelligence Customization - Add support for Azure Configuration and Settings
+  if (process.env.ARX_SITE_URL) {
+    config.domain = process.env.ARX_SITE_URL;
+  }
+  if (process.env.ARX_MONGO_CONNECT) {
+    config.mongo = process.env.ARX_MONGO_CONNECT;
+  }
+  if (process.env.ARX_MONGO_SECRET) {
+    config.mongoSecret = process.env.ARX_MONGO_SECRET;
+  }
+  if (process.env.ARX_MONGO_SECRET) {
+    config.jwt.secret = process.env.ARX_JWT_SECRET;
+  }
 
   // Current codebase version.
   if (!config.schema && !process.env.TEST_SUITE) {

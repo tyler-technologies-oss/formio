@@ -2,11 +2,116 @@
 All notable changes to this project will be documented in this file
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](http://semver.org/)
+and this project adheres to [Semantic Versioning](http://semver.org/)//
 
-## [Unreleased: 3.0.0-rc.5]
+## [Unreleased: 3.2.0-rc.1]
+### Fixed
+ - FIO-6601: Fix getting submissions by reference from custom submissions collection
+ - FIO-4500: Fixes an issue where specified in the component settings delimiter is not used for CSVExport of Tags component data
+ - FIO-6414: fixed filtering issues inside DT
+ - FIO-4216: Fixes 'Resource not found' issue when using submission collection and trying to retrieve submission using x-token
+ - FIO-6840: Refactor authentication to use case-insensitive query and fallback to $regex
+ - FIO-6729: changed the output of data in the logs
+ - FIO-3840: fixed swagger spec definition for components with obj type
+ - FIO-6406: fixed filter for Select inside DT
+ - Bump json5 from 2.2.1 to 2.2.3
+ - Bump @xmldom/xmldom from 0.7.5 to 0.7.11
+ - Bump nunjucks from 3.2.3 to 3.2.4
+ - Bump vm2 from 3.9.11 to 3.9.18
+ - Bump semver from 7.3.8 to 7.5.2
+ - Bump cookiejar from 2.1.3 to 2.1.4
+ - FIO-6840: change to allow case insensitive exists endpoint
+
+### Changed
+ - FIO-6769: Removed the `empty` template
+
+## 3.1.0-rc.5
+### Fixed
+ - FIO 6579: another potential problem with legacy templates
+ - FIO-6424: fixed displaying of Select component with Save as reference property when download PDF
+
+## 3.1.0-rc.4
+### Changed
+ - TO-DO: ADD INFO HERE.
+
+## 3.1.0-rc.3
+### Changed
+ - Updated formiojs@4.15.0-rc.19
+ - Updated formio-workers@1.17.0-rc.2
+
+### Fixed
+ - FIO-5688: Allow for a DEFAULT_TRANSPORT to enable the default sending…
+
+## 3.1.0-rc.2
+### Changed
+ - Revert "FIO-5497: fixed DeprecationWarning for crypto.createDecipher"
+ - FIO-5709: fix the response radio value in the CSV shows as blank
+
+## 3.1.0-rc.1
+### Changed
+ - Updated formiojs@4.15.0-rc.18
+ - Updated formio-workers@1.17.0-rc.1
+
+### Changed
+ - Increment minor version.
+ - Remove submission collection tests in open source core
+ - upgrade jsonwebtoken dependency
+ - Allow the display of all images and signatures in index when ?full=true is provided in the url
+ - Revert "FIO-5497: fixed DeprecationWarning for crypto.createDecipher"
+
+### Fixed
+ - FIO-4189: fixed advanced logic not working inside Nested Form
+ - FIO-5497: fixed DeprecationWarning for crypto.createDecipher
+ - FIO-5471: Removed mongoose.save from codebase
+ - FIO-5860: export error caused by old temp
+ - FIO-5860: fixed tests
+ - Revert "FIO-5233: fixed an issue with incorrect values in different timezones…"
+ - FIO-5911: update email action steps
+ - FIO-5785 Fixed Select component submission showing id instead of template for URL data source
+ - FIO-5904: fixed saving data for Components outside of Wizards
+ - FIO-6069: document db restrictions handling
+ - FIO-5904: Fixed a bug where data for form components wouldn't save if outside of a wizard
+ - FIO-5688: Allow for a DEFAULT_TRANSPORT to enable the default sending method for emails.
+ - FIO-6579: Fix project template exports crashing the server
+
+## 3.0.0-rc.11
+### Fixed
+ - FIO-5494: removed erroneous empty addresses
+ - FIO-5774: added revisions of submissions collections
+ - FIO-5756: PDF | Regression | FFT 502 Bad gateway error after Click on submit
+ - FIO-5495: added submission data for delete req
+
+## 3.0.0-rc.10
+### Fixed
+ - FIO-5435: fixed exists endpoint with submission collections
+ - FIO-5090: vid numbering fix
+
+### Changed
+ - Upgrade dependencies: body-parser@1.20.1, express@4.18.2, mongoose@6.6.5, nodemailer-mailgun-transport@2.1.5, semver@7.3.8, nodemon@2.0.20, mongodb@4.10.0, nodemailer@6.8.0, eslint@8.
+25.0, supertest@6.3.0, mailgun.js@8.0.1
+
+## 3.0.0-rc.9
+### Fixed
+ - FIO-5433: fixed (snyk) Prototype Pollution in mongoose
+ - Upgrade dependencies.
+
+## 3.0.0-rc.8
+### Fixed
+ - FIO-4433: fixed recalculation on server for draft submission
+
+## 3.0.0-rc.7
+### Fixed
+ - FIO-5155: Fixes submissions not loaded for sub forms with array data structure
+ - FIO-5363: deleted default value of transport select for email action settings
+
+## 3.0.0-rc.6
+### Fixed
+ - FIO-5334: fixed typo in the email action settings bcc placeholder
+
+## 3.0.0-rc.5
 ### Fixed
  - FIO-5199: Provided user information for external users
+ - FIO-5233: fixed an issue with incorrect values in different timezones
 
 ## 3.0.0-rc.4
 ### Fixed
@@ -97,7 +202,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/)
  - FIO-4003: added ability to use the revisionId
 
 ### Fixed
- - FIO-3853: fixed export json function freeze 
+ - FIO-3853: fixed export json function freeze
 
 ## 2.3.3
 ### Changed

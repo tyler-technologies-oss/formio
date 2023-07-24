@@ -44,6 +44,7 @@ module.exports = function(router) {
             if (component) {
               switch (component.type) {
                 case 'number':
+                case 'currency':
                   return Number(value);
                 case 'checkbox':
                   return value !== 'false';
@@ -54,7 +55,15 @@ module.exports = function(router) {
                     return date.toDate();
                   }
                 }
+                case 'select': {
+                  if (Number(value) || value === "0") {
+                    return Number(value);
+                  }
+                }
               }
+            }
+            if (!component && ['true', 'false'].includes(value)) {
+              return value !== 'false';
             }
             return value;
           })
