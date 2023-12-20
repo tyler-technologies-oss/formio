@@ -614,7 +614,9 @@ const Utils = {
       else if ((component.type === 'signature') && (action === 'index') && !doNotMinify) {
         modifyFields.push(((submission) => {
           const data = _.get(submission, path);
-          _.set(submission, path, (!data || (data.length < 25)) ? '' : 'YES');
+          if (!_.isUndefined(data)) {
+            _.set(submission, path, (!data || (data.length < 25)) ? '' : 'YES');
+          }
         }));
       }
       else if (component.type === 'file' && action === 'index' && !doNotMinify) {
@@ -745,6 +747,7 @@ const Utils = {
     'tabs',
   ],
 
+  /*eslint max-depth: ["error", 4]*/
   eachValue(
     components,
     data,
@@ -850,6 +853,9 @@ const Utils = {
       }
     });
   },
+  // Skips hook execution in case of no hook by provided name found
+  // Pass as the last argument to formio.hook.alter() function
+  skipHookIfNotExists: () => _.noop(),
 };
 
 module.exports = Utils;
