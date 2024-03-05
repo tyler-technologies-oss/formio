@@ -20,6 +20,7 @@ services:
     restart: always
     volumes:
       - mdb-data:/data/db
+      - mdb-data:/data/configdb
     environment:
       MONGO_INITDB_ROOT_USERNAME:
       MONGO_INITDB_ROOT_PASSWORD:
