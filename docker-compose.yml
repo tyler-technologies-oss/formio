@@ -24,6 +24,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME:
       MONGO_INITDB_ROOT_PASSWORD:
+    networks:
+      - tyler_ai_network
 
   formio:
     build: ./
@@ -44,6 +46,13 @@ services:
       ROOT_PASSWORD: CHANGEME
     stdin_open: true  # -i
     tty: true         # -t
+    networks:
+      - tyler_ai_network
 
 volumes:
   mdb-data:
+
+networks:
+  tyler_ai_network:
+    name: tyler_ai_network
+    external: true
