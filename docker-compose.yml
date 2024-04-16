@@ -54,5 +54,5 @@ volumes:
 
 networks:
   tyler_ai_network:
-    name: tyler_ai_network
+    name: tyler-ai-network
     external: true
