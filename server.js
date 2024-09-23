@@ -11,6 +11,7 @@ const util = require('./src/util/util');
 require('colors');
 const Q = require('q');
 const cors = require('cors');
+const helmet = require('helmet');
 const test = process.env.TEST_SUITE;
 const noInstall = process.env.NO_INSTALL;
 
@@ -41,6 +42,15 @@ module.exports = function(options) {
 
   // Use the express application.
   const app = options.app || express();
+
+  // Enable HSTS with a max age of 1 year
+  const hstsOptions = {
+    maxAge: 31536000, // 1 year in seconds
+    includeSubDomains: true, // Apply HSTS to all subdomains
+    preload: true // Preload HSTS
+  };
+
+  app.use(helmet.hsts(hstsOptions));
 
   // Use the given config.
   const config = options.config || require('config');
